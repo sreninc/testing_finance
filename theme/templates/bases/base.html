@@ -1,0 +1,81 @@
+{% load static tailwind_tags %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+
+
+		{% block meta %}
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		{% endblock %}
+
+		{% block extra_meta %}
+		{% endblock %}
+
+		{% block corecss %}
+		{% endblock %}
+
+		{% block extra_css %}
+		{% endblock %}
+
+		{% block corejs %}
+			<!-- Stripe -->
+			<script src="https://js.stripe.com/v3/"></script>
+		{% endblock %}
+
+		{% block extra_js %}
+		{% endblock %}
+
+    	<title>FinDos | {% block extra_title %}{% endblock %}</title>
+		
+		{% tailwind_css %}
+	</head>
+
+	<body>
+
+
+		{% block page_header %}
+		{% endblock %}
+
+		{% if messages %}
+		<div class="message-container">
+			{% for message in messages %}
+				{% with message.level as level %}
+					{% if level == 40 %}
+						{% include 'includes/toasts/toast_error.html' %}
+					{% elif level == 30 %}
+						{% include 'includes/toasts/toast_warning.html' %}
+					{% elif level == 25 %}
+						{% include 'includes/toasts/toast_success.html' %}
+					{% else %}
+						{% include 'includes/toasts/toast_info.html' %}
+					{% endif %}
+				{% endwith %}
+			{% endfor %}
+		</div>
+		{% endif %}
+
+		{% block content %}
+		{% endblock %}
+
+		{% block footer %}
+		{% endblock %}
+
+		{% block postloadjs %}
+		{% endblock %}
+
+		<script>
+			function toggleMenu(menu) {
+			  menu = document.getElementById(menu);
+			  if (menu.classList.contains("hidden")) {
+				menu.classList.remove("hidden");
+			  } else {
+				menu.classList.add("hidden");
+			  }
+			}
+		  </script>
+	</body>
+</html>
